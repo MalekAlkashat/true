@@ -1,0 +1,44 @@
+{
+  "partners": [
+    {
+      "name": "Legrand",
+      "logo": "legrand.png",
+      "source": "https://www.legrand.com",
+      "status": "success",
+      "scale": 4,
+      "hidden": false
+    },
+    {
+      "name": "Bticino",
+      "logo": "bticino.svg",
+      "source": "https://www.bticino.com",
+      "status": "success",
+      "scale": 1,
+      "hidden": false
+    },
+    {
+      "name": "Zennio",
+      "logo": "zennio.svg",
+      "source": "https://www.zennio.com",
+      "status": "success",
+      "scale": 1,
+      "hidden": false
+    },
+    {
+      "name": "Distech Controls",
+      "logo": "distech-controls-vector-logo-2022.svg",
+      "source": "https://www.distech-controls.com",
+      "status": "success",
+      "scale": 2.5,
+      "hidden": false
+    },
+    {
+      "name": "HDL Automation",
+      "logo": "hdl-automation-logo-vector.svg",
+      "source": "https://www.hdlautomation.com",
+      "status": "success",
+      "scale": 1,
+      "hidden": false
+    }
+  ]
+}

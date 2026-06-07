@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TRUE Admin Dashboard</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #0f1014;
+        color: #f5f7fb;
+      }
+
+      body {
+        margin: 0;
+        background: #0f1014;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 28px;
+        border-bottom: 1px solid #252936;
+        background: #15171d;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: #87b7ff;
+      }
+
+      .logout {
+        color: #cfd4df;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      main {
+        padding: 24px 28px 40px;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .count {
+        color: #9ea5b5;
+        font-size: 14px;
+      }
+
+      input[type="search"] {
+        width: min(420px, 100%);
+        padding: 11px 12px;
+        border: 1px solid #303645;
+        border-radius: 6px;
+        background: #151922;
+        color: #ffffff;
+        font: inherit;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid #282d3a;
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 980px;
+        background: #15171d;
+      }
+
+      th,
+      td {
+        padding: 13px 14px;
+        border-bottom: 1px solid #282d3a;
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+      }
+
+      th {
+        color: #aab2c2;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        background: #191c24;
+      }
+
+      tr.summary {
+        cursor: pointer;
+      }
+
+      tr.summary:hover {
+        background: #1b1f29;
+      }
+
+      tr.details[hidden] {
+        display: none;
+      }
+
+      .details td {
+        background: #11141b;
+        color: #d8dce5;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 6px;
+        color: #8f98aa;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .notes {
+        white-space: pre-wrap;
+      }
+
+      .status {
+        border: 0;
+        border-radius: 999px;
+        padding: 7px 11px;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .New {
+        background: #2563eb;
+      }
+
+      .Contacted {
+        background: #168044;
+      }
+
+      .Closed {
+        background: #6b7280;
+      }
+
+      .empty {
+        padding: 28px;
+        color: #aab2c2;
+        text-align: center;
+      }
+
+      @media (max-width: 760px) {
+        header,
+        .toolbar {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        main {
+          padding: 18px 14px 30px;
+        }
+
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Submissions</h1>
+      <a class="logout" href="/admin/logout">Log out</a>
+    </header>
+    <main>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search name, phone, or service">
+        <span class="count" id="count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date/Time</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Space Type</th>
+              <th>Services</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </main>
+    <script>
+      const submissions = {{SUBMISSIONS_JSON}};
+      const rows = document.getElementById('rows');
+      const search = document.getElementById('search');
+      const count = document.getElementById('count');
+
+      function escapeHtml(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        })[char]);
+      }
+
+      function services(submission) {
+        return (submission.systems || []).join(', ');
+      }
+
+      function fileLinks(submission) {
+        if (!submission.files || !submission.files.length) {
+          return 'No uploaded files';
+        }
+
+        return submission.files.map((file) => {
+          const name = typeof file === 'string' ? file : file.name;
+          const href = `/admin/files/${encodeURIComponent(submission.id)}/${encodeURIComponent(name)}`;
+          return `<a href="${href}">${escapeHtml(name)}</a>`;
+        }).join('<br>');
+      }
+
+      function matches(submission, query) {
+        const haystack = [
+          submission.fullName,
+          submission.mobile,
+          services(submission),
+        ].join(' ').toLowerCase();
+
+        return haystack.includes(query);
+      }
+
+      function render() {
+        const query = search.value.trim().toLowerCase();
+        const visible = submissions.filter((submission) => matches(submission, query));
+        count.textContent = `${visible.length} of ${submissions.length}`;
+
+        if (!visible.length) {
+          rows.innerHTML = '<tr><td class="empty" colspan="7">No submissions found.</td></tr>';
+          return;
+        }
+
+        rows.innerHTML = visible.map((submission) => {
+          const status = escapeHtml(submission.status || 'New');
+          const date = submission.timestamp ? new Date(submission.timestamp).toLocaleString() : '';
+          return `
+            <tr class="summary" data-id="${escapeHtml(submission.id)}">
+              <td>${escapeHtml(date)}</td>
+              <td>${escapeHtml(submission.fullName)}</td>
+              <td>${escapeHtml(submission.mobile)}</td>
+              <td><a href="mailto:${escapeHtml(submission.email)}">${escapeHtml(submission.email)}</a></td>
+              <td>${escapeHtml(submission.spaceType)}</td>
+              <td>${escapeHtml(services(submission))}</td>
+              <td><button class="status ${status}" data-status-id="${escapeHtml(submission.id)}">${status}</button></td>
+            </tr>
+            <tr class="details" data-details-for="${escapeHtml(submission.id)}" hidden>
+              <td colspan="7">
+                <div class="details-grid">
+                  <div><span class="label">Wiring Preference</span>${escapeHtml(submission.wiringPreference || 'Not provided')}</div>
+                  <div><span class="label">Home Systems</span>${escapeHtml((submission.homeSystems || []).join(', ') || 'None')}</div>
+                  <div><span class="label">Files</span>${fileLinks(submission)}</div>
+                  <div><span class="label">Notes</span><div class="notes">${escapeHtml(submission.notes || 'None')}</div></div>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      rows.addEventListener('click', async (event) => {
+        const statusButton = event.target.closest('[data-status-id]');
+        if (statusButton) {
+          event.stopPropagation();
+          const id = statusButton.dataset.statusId;
+          const response = await fetch(`/admin/status/${encodeURIComponent(id)}`, { method: 'POST' });
+          if (response.ok) {
+            const result = await response.json();
+            const submission = submissions.find((item) => item.id === id);
+            if (submission) {
+              submission.status = result.status;
+            }
+            render();
+          }
+          return;
+        }
+
+        const summary = event.target.closest('.summary');
+        if (summary) {
+          const details = rows.querySelector(`[data-details-for="${CSS.escape(summary.dataset.id)}"]`);
+          if (details) {
+            details.hidden = !details.hidden;
+          }
+        }
+      });
+
+      search.addEventListener('input', render);
+      render();
+    </script>
+  </body>
+</html>

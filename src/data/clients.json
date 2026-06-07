@@ -1,0 +1,108 @@
+{
+  "clients": [
+    {
+      "name": "H&M",
+      "logo": "H&M.svg",
+      "attempted_url": "",
+      "scale": 1.7,
+      "hidden": false
+    },
+    {
+      "name": "Tiffany & Co.",
+      "logo": "tiffany_Co.svg",
+      "attempted_url": "",
+      "scale": 1,
+      "hidden": false
+    },
+    {
+      "name": "Bvlgari",
+      "logo": "bvlgari.png",
+      "attempted_url": "",
+      "scale": 1,
+      "hidden": false
+    },
+    {
+      "name": "Chanel",
+      "logo": "chanel.png",
+      "attempted_url": "",
+      "scale": 1.2,
+      "hidden": false
+    },
+    {
+      "name": "Dior",
+      "logo": "dior.png",
+      "attempted_url": "",
+      "scale": 0.87,
+      "hidden": false
+    },
+    {
+      "name": "Louis Vuitton",
+      "logo": "louisvuitton.png",
+      "attempted_url": "https://www.louisvuitton.com",
+      "scale": 1.3,
+      "hidden": false
+    },
+    {
+      "name": "Jaeger-LeCoultre",
+      "logo": "jaeger-leCoultre.png",
+      "attempted_url": "",
+      "scale": 1.1,
+      "hidden": false
+    },
+    {
+      "name": "The Cheesecake Factory",
+      "logo": "cheesecake_factory.svg",
+      "attempted_url": "https://www.thecheesecakefactory.com",
+      "scale": 3.1,
+      "hidden": false
+    },
+    {
+      "name": "P.F. Chang's",
+      "logo": "pfchangs.png",
+      "attempted_url": "",
+      "scale": 1.2,
+      "hidden": false
+    },
+    {
+      "name": "Texas Roadhouse",
+      "logo": "Texas_Roadhouse.svg",
+      "attempted_url": "",
+      "scale": 2.2,
+      "hidden": false
+    },
+    {
+      "name": "TGI Fridays",
+      "logo": "TGI_Fridays.svg",
+      "attempted_url": "",
+      "scale": 2,
+      "hidden": false
+    },
+    {
+      "name": "Starbucks",
+      "logo": "Starbucks.svg",
+      "attempted_url": "",
+      "scale": 2,
+      "hidden": false
+    },
+    {
+      "name": "Milk Bun",
+      "logo": "milkBun.png",
+      "attempted_url": "",
+      "scale": 1.3,
+      "hidden": false
+    },
+    {
+      "name": "Blaze Pizza",
+      "logo": "blazepizza.svg",
+      "attempted_url": "",
+      "scale": 0.87,
+      "hidden": false
+    },{
+      "name": "IHOP",
+      "logo": "IHOP.svg",
+      "attempted_url": "",
+      "scale": 1.7,
+      "hidden": false
+    }
+  ]
+}
