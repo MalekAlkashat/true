@@ -4,13 +4,39 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
 import { Toaster } from "@/components/ui/sonner";
+import { JsonLd } from "@/components/site/JsonLd";
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: "TRUE for General Trading & Contracting Co.",
+  alternateName: "TRUE Automation",
+  url: "https://true.com.kw",
+  logo: "https://true.com.kw/logo.png",
+  image: "https://true.com.kw/logo.png",
+  telephone: ["+96552220900", "+96550544882"],
+  email: "info@true.com.kw",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Ben Khaldoun St., Shoaa Complex, 5th Fl",
+    addressLocality: "Hawally",
+    addressCountry: "KW",
+  },
+  areaServed: { "@type": "Country", name: "Kuwait" },
+  sameAs: [
+    "https://www.instagram.com/true.automation",
+    "https://www.linkedin.com/company/true-for-genral-trading-&-contracting-co-",
+  ],
+};
 
 function NotFoundComponent() {
   return (
@@ -97,9 +123,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { location } = useRouterState();
+  const isAr = location.pathname.startsWith("/ar");
+
+  useEffect(() => {
+    document.documentElement.dir = isAr ? "rtl" : "ltr";
+    document.documentElement.lang = isAr ? "ar" : "en";
+  }, [isAr]);
 
   return (
     <QueryClientProvider client={queryClient}>
+      <JsonLd data={organizationJsonLd} />
       <div className="flex min-h-screen flex-col bg-background text-foreground">
         <Header />
         <main className="flex-1 pt-20">

@@ -10,6 +10,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { solutions, type SolutionSlug } from "@/data/solutions";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -20,7 +21,24 @@ export const Route = createFileRoute("/services")({
       { property: "og:description", content: "Full-stack automation and low-voltage engineering for residential and commercial projects in Kuwait." },
       { property: "og:url", content: "/services" },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [
+      { rel: "canonical", href: "/services" },
+      {
+        rel: "alternate",
+        hrefLang: "en",
+        href: "https://true.com.kw/services",
+      },
+      {
+        rel: "alternate",
+        hrefLang: "ar",
+        href: "https://true.com.kw/ar/services",
+      },
+      {
+        rel: "alternate",
+        hrefLang: "x-default",
+        href: "https://true.com.kw/services",
+      },
+    ],
   }),
   component: ServicesPage,
 });
@@ -129,7 +147,7 @@ const processCardVariants = {
     y: 0,
     transition: {
       duration: 0.85,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
 };
@@ -181,6 +199,29 @@ function ServicesPage() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="py-24">
+        <div className="container mx-auto px-6 md:px-10 lg:px-12">
+          <Reveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Explore by Solution</p>
+              <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Go deeper on each solution.</h2>
+            </div>
+          </Reveal>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {solutions.map((sol) => (
+              <Link
+                key={sol.slug}
+                to={`/${sol.slug}` as `/${SolutionSlug}`}
+                className="group rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/50"
+              >
+                <h3 className="font-semibold group-hover:text-primary">{sol.label}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{sol.short}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

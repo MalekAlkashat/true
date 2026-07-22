@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { type ChangeEvent, type DragEvent, type ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import {
+  type ChangeEvent,
+  type DragEvent,
+  type ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Building2,
@@ -24,27 +32,39 @@ import { cn } from "@/lib/utils";
 
 const WHATSAPP_URL = "https://wa.me/96552220900";
 const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
-const ACCEPTED_FILE_EXTENSIONS = new Set(["pdf", "dwg", "dwf", "jpg", "jpeg", "png", "zip"]);
+const ACCEPTED_FILE_EXTENSIONS = new Set([
+  "pdf",
+  "dwg",
+  "dwf",
+  "jpg",
+  "jpeg",
+  "png",
+  "zip",
+]);
 const ACCEPTED_FILE_TYPES = ".pdf,.dwg,.dwf,.jpg,.jpeg,.png,.zip";
 const MAX_FILE_SIZE = 25 * 1024 * 1024;
 const MAX_FILES = 5;
 
-export const Route = createFileRoute("/contact")({
+export const Route = createFileRoute("/ar/contact")({
   head: () => ({
     meta: [
-      { title: "Contact TRUE Automation - Kuwait" },
-      { name: "description", content: "Talk to TRUE Automation's engineers in Kuwait about smart home, BAS, BMS and low-voltage projects. Call +965 5222 0900 or email info@true.com.kw." },
-      { property: "og:title", content: "Contact TRUE Automation" },
-      { property: "og:description", content: "Get a free consultation for your smart home or building automation project in Kuwait." },
-      { property: "og:url", content: "/contact" },
+      { title: "تواصل مع TRUE Automation - الكويت" },
+      {
+        name: "description",
+        content:
+          "تحدث مع مهندسي TRUE Automation في الكويت حول مشاريع المنزل الذكي وBAS وBMS والتيار المنخفض. اتصل على 0900 5222 965+ أو راسلنا على info@true.com.kw.",
+      },
+      { property: "og:title", content: "تواصل مع TRUE Automation" },
+      {
+        property: "og:description",
+        content:
+          "احصل على استشارة مجانية لمشروع المنزل الذكي أو أتمتة المباني في الكويت.",
+      },
+      { property: "og:url", content: "/ar/contact" },
     ],
     links: [
-      { rel: "canonical", href: "/contact" },
-      {
-        rel: "alternate",
-        hrefLang: "en",
-        href: "https://true.com.kw/contact",
-      },
+      { rel: "canonical", href: "/ar/contact" },
+      { rel: "alternate", hrefLang: "en", href: "https://true.com.kw/contact" },
       {
         rel: "alternate",
         hrefLang: "ar",
@@ -61,66 +81,66 @@ export const Route = createFileRoute("/contact")({
 });
 
 const countries = [
-  { code: "KW", name: "Kuwait", dial: "+965" },
-  { code: "SA", name: "Saudi Arabia", dial: "+966" },
-  { code: "AE", name: "United Arab Emirates", dial: "+971" },
-  { code: "QA", name: "Qatar", dial: "+974" },
-  { code: "BH", name: "Bahrain", dial: "+973" },
-  { code: "OM", name: "Oman", dial: "+968" },
+  { code: "KW", name: "الكويت", dial: "+965" },
+  { code: "SA", name: "السعودية", dial: "+966" },
+  { code: "AE", name: "الإمارات العربية المتحدة", dial: "+971" },
+  { code: "QA", name: "قطر", dial: "+974" },
+  { code: "BH", name: "البحرين", dial: "+973" },
+  { code: "OM", name: "عُمان", dial: "+968" },
 ];
 
-const steps = ["Who are you?", "Project", "Drawings"];
-const spaceTypes = ["Villa / Residence", "Commercial Building", "Hospitality", "Retail", "Other"];
+const steps = ["من أنت؟", "المشروع", "المخططات"];
+const spaceTypes = ["فيلا / سكن", "مبنى تجاري", "ضيافة", "تجزئة", "أخرى"];
 const systems = [
-  { label: "Home Automation", icon: Home },
-  { label: "Building Automation (BAS)", icon: Building2 },
-  { label: "Building Management (BMS)", icon: Gauge },
-  { label: "Guest Room Management System (GRMS)", icon: BedDouble },
-  { label: "Low Voltage Systems", icon: Cable },
+  { label: "أتمتة المنزل", icon: Home },
+  { label: "أتمتة المباني (BAS)", icon: Building2 },
+  { label: "إدارة المباني (BMS)", icon: Gauge },
+  { label: "نظام إدارة الغرف الفندقية (GRMS)", icon: BedDouble },
+  { label: "أنظمة التيار المنخفض", icon: Cable },
 ];
-const wiringOptions = ["Wired", "Wireless", "Not Sure Yet"];
+const wiringOptions = ["سلكي", "لاسلكي", "غير متأكد بعد"];
 const homeSystems = [
-  "Lighting Control",
-  "Curtains & Shutters",
-  "HVAC Control",
-  "Sound System",
-  "Intercom System",
-  "Irrigation Control",
-  "Facility Monitoring",
+  "التحكم بالإضاءة",
+  "الستائر والشدات",
+  "التحكم بالتكييف",
+  "نظام الصوت",
+  "نظام الاتصال الداخلي",
+  "التحكم بالري",
+  "مراقبة المنشأة",
 ];
 const systemSubOptions: Record<string, string[]> = {
-  "Home Automation": homeSystems,
-  "Building Automation (BAS)": [
-    "HVAC Control & Scheduling",
-    "Lighting Automation",
-    "Energy Monitoring",
-    "Access Control Integration",
-    "Fire Alarm Integration",
-    "Elevator & Escalator Monitoring",
+  "أتمتة المنزل": homeSystems,
+  "أتمتة المباني (BAS)": [
+    "التحكم بالتكييف والجدولة",
+    "أتمتة الإضاءة",
+    "مراقبة الطاقة",
+    "تكامل التحكم بالدخول",
+    "تكامل إنذار الحريق",
+    "مراقبة المصاعد والسلالم الكهربائية",
   ],
-  "Building Management (BMS)": [
-    "Centralized Dashboard & Reporting",
-    "Multi-Floor / Multi-Zone Control",
-    "Predictive Maintenance Alerts",
-    "Energy Analytics",
-    "BACnet / KNX / Modbus Integration",
-    "Remote Access & Diagnostics",
+  "إدارة المباني (BMS)": [
+    "لوحة مركزية وتقارير",
+    "تحكم متعدد الطوابق / المناطق",
+    "تنبيهات صيانة تنبؤية",
+    "تحليلات الطاقة",
+    "تكامل BACnet / KNX / Modbus",
+    "وصول وتشخيص عن بُعد",
   ],
-  "Guest Room Management System (GRMS)": [
-    "Bedside panel & touch control",
-    "Lighting scenes & dimming",
-    "Motorized curtains & shutters",
-    "HVAC & temperature control",
-    "DND / Make Up Room signage",
-    "Mobile app & PMS integration",
+  "نظام إدارة الغرف الفندقية (GRMS)": [
+    "لوحة تحكم بجانب السرير",
+    "مشاهد إضاءة وإعتام",
+    "ستائر وشدات آلية",
+    "تحكم بالتكييف ودرجة الحرارة",
+    "لافتات عدم الإزعاج / نظفوا الغرفة",
+    "تكامل تطبيق الجوال ونظام PMS",
   ],
-  "Low Voltage Systems": [
-    "Structured Cabling & Network",
-    "IP Camera & CCTV",
-    "Intercom & Video Door Entry",
-    "Public Address & Audio System",
-    "Satellite & TV Distribution",
-    "Access Control & Biometrics",
+  "أنظمة التيار المنخفض": [
+    "تمديدات وشبكات منظمة",
+    "كاميرات IP ومراقبة",
+    "اتصال داخلي وفيديو للباب",
+    "نظام صوت ونداء عام",
+    "توزيع الأقمار الصناعية والتلفاز",
+    "التحكم بالدخول والقياسات الحيوية",
   ],
 };
 
@@ -154,13 +174,19 @@ function ContactPage() {
       <section className="relative overflow-hidden border-b border-border/60 bg-gradient-hero py-24 md:py-28">
         <div className="absolute -right-32 top-0 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
         <div className="container relative mx-auto px-6 md:px-10 lg:px-12 text-center">
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Get in Touch</p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              تواصل معنا
+            </p>
             <h1 className="mt-3 text-5xl font-bold tracking-tight md:text-6xl">
-              Let's build something <span className="text-gradient">intelligent.</span>
+              لنبنِ شيئًا <span className="text-gradient">ذكيًا.</span>
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-              Tell us about your project - our engineers reply within one business day.
+              أخبرنا عن مشروعك - يرد مهندسونا خلال يوم عمل واحد.
             </p>
           </motion.div>
         </div>
@@ -171,11 +197,35 @@ function ContactPage() {
           <Reveal className="contents lg:col-span-2 lg:block">
             <div className="space-y-6">
               {[
-                { icon: Phone, label: "Call", value: "+965 5222 0900", href: "tel:+96552220900" },
-                { icon: Phone, label: "Mobile", value: "+965 5054 4882", href: "tel:+96550544882" },
-                { icon: Mail, label: "Email", value: "info@true.com.kw", href: "mailto:info@true.com.kw" },
-                { icon: MapPin, label: "Office", value: "Ben Khaldoun St., Shoaa Complex, 5th Fl, Hawally, Kuwait" },
-                { icon: Clock, label: "Hours", value: "Sun - Thu - 9:00 - 18:00" },
+                {
+                  icon: Phone,
+                  label: "اتصال",
+                  value: "+965 5222 0900",
+                  href: "tel:+96552220900",
+                },
+                {
+                  icon: Phone,
+                  label: "جوال",
+                  value: "+965 5054 4882",
+                  href: "tel:+96550544882",
+                },
+                {
+                  icon: Mail,
+                  label: "البريد الإلكتروني",
+                  value: "info@true.com.kw",
+                  href: "mailto:info@true.com.kw",
+                },
+                {
+                  icon: MapPin,
+                  label: "المكتب",
+                  value:
+                    "شارع بن خلدون، مجمع الشعاع، الطابق الخامس، حولي، الكويت",
+                },
+                {
+                  icon: Clock,
+                  label: "ساعات العمل",
+                  value: "الأحد - الخميس - 9:00 - 18:00",
+                },
               ].map((c) => (
                 <div
                   key={c.label}
@@ -185,9 +235,21 @@ function ContactPage() {
                     <c.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.label}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {c.label}
+                    </div>
                     <div className="mt-1 flex flex-wrap items-center gap-3 text-sm font-medium text-foreground">
-                      {c.href ? <a href={c.href} className="hover:text-primary">{c.value}</a> : <span>{c.value}</span>}
+                      {c.href ? (
+                        <a
+                          href={c.href}
+                          className="hover:text-primary"
+                          dir="ltr"
+                        >
+                          {c.value}
+                        </a>
+                      ) : (
+                        <span>{c.value}</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -196,7 +258,7 @@ function ContactPage() {
 
             <div className="order-last mt-6 overflow-hidden rounded-2xl border border-border shadow-card md:order-none">
               <iframe
-                title="TRUE Automation office location"
+                title="موقع مكتب TRUE Automation"
                 src="https://www.google.com/maps?q=Ben+Khaldoun+St,+Shoaa+Complex,+Hawally,+Kuwait&output=embed"
                 className="h-72 w-full"
                 loading="lazy"
@@ -225,14 +287,22 @@ function ContactWizard() {
   const [complete, setComplete] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const selectedCountry = countries.find((country) => country.dial === data.countryCode) ?? countries[0];
+  const selectedCountry =
+    countries.find((country) => country.dial === data.countryCode) ??
+    countries[0];
 
   function scrollToFormTop() {
-    const formTop = (formRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY - 100;
+    const formTop =
+      (formRef.current?.getBoundingClientRect().top ?? 0) +
+      window.scrollY -
+      100;
     window.scrollTo({ top: formTop, behavior: "smooth" });
   }
 
-  function updateField<K extends keyof WizardData>(field: K, value: WizardData[K]) {
+  function updateField<K extends keyof WizardData>(
+    field: K,
+    value: WizardData[K],
+  ) {
     setData((current) => ({ ...current, [field]: value }));
     setShowRequiredMessage(false);
     setErrors((current) => {
@@ -249,7 +319,10 @@ function ContactWizard() {
         return {
           ...current,
           systems: selected ? [] : [value],
-          wiringPreference: selected || value !== "Home Automation" ? "" : current.wiringPreference,
+          wiringPreference:
+            selected || value !== "أتمتة المنزل"
+              ? ""
+              : current.wiringPreference,
           homeSystems: [],
         };
       }
@@ -261,7 +334,7 @@ function ContactWizard() {
       return {
         ...current,
         [field]: nextValues,
-        ...(field === "systems" && selected && value === "Home Automation"
+        ...(field === "systems" && selected && value === "أتمتة المنزل"
           ? { wiringPreference: "", homeSystems: [] }
           : {}),
       };
@@ -278,16 +351,18 @@ function ContactWizard() {
     const nextErrors: Record<string, string> = {};
 
     if (step === 0) {
-      if (!data.fullName.trim()) nextErrors.fullName = "Full name is required.";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) nextErrors.email = "Enter a valid email address.";
-      if (!data.mobile.trim()) nextErrors.mobile = "Mobile number is required.";
+      if (!data.fullName.trim()) nextErrors.fullName = "الاسم الكامل مطلوب.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim()))
+        nextErrors.email = "أدخل بريدًا إلكترونيًا صحيحًا.";
+      if (!data.mobile.trim()) nextErrors.mobile = "رقم الجوال مطلوب.";
     }
 
     if (step === 1) {
-      if (!data.spaceType) nextErrors.spaceType = "Choose the type of space.";
-      if (!data.systems.length) nextErrors.systems = "Choose at least one system.";
-      if (data.systems.includes("Home Automation") && !data.wiringPreference) {
-        nextErrors.wiringPreference = "Choose a wiring preference.";
+      if (!data.spaceType) nextErrors.spaceType = "اختر نوع المساحة.";
+      if (!data.systems.length)
+        nextErrors.systems = "اختر نظامًا واحدًا على الأقل.";
+      if (data.systems.includes("أتمتة المنزل") && !data.wiringPreference) {
+        nextErrors.wiringPreference = "اختر تفضيل التمديد.";
       }
     }
 
@@ -333,19 +408,19 @@ function ContactWizard() {
     });
 
     if (invalidType) {
-      setFileError("Only PDF, DWG, DWF, JPG, PNG, and ZIP files are accepted.");
+      setFileError("يُقبل فقط ملفات PDF وDWG وDWF وJPG وPNG وZIP.");
       return;
     }
 
     if (incoming.some((file) => file.size > MAX_FILE_SIZE)) {
-      setFileError("Each file must be 25MB or smaller.");
+      setFileError("يجب ألا يتجاوز حجم كل ملف 25 ميجابايت.");
       return;
     }
 
     setFiles((current) => {
       const merged = [...current, ...incoming].slice(0, MAX_FILES);
       if (current.length + incoming.length > MAX_FILES) {
-        setFileError("You can upload up to 5 files.");
+        setFileError("يمكنك رفع حتى 5 ملفات.");
       } else {
         setFileError("");
       }
@@ -354,7 +429,9 @@ function ContactWizard() {
   }
 
   function removeFile(index: number) {
-    setFiles((current) => current.filter((_, fileIndex) => fileIndex !== index));
+    setFiles((current) =>
+      current.filter((_, fileIndex) => fileIndex !== index),
+    );
     setFileError("");
   }
 
@@ -367,14 +444,20 @@ function ContactWizard() {
     return {
       ...data,
       mobile: `${data.countryCode} ${data.mobile}`,
-      files: files.map((file) => ({ name: file.name, size: file.size, type: file.type })),
+      files: files.map((file) => ({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+      })),
     };
   }
 
   async function submitToBackend(submissionChannel: "email" | "whatsapp") {
     const payload = getPayload();
     const submissionPayload = {
-      ...Object.fromEntries(Object.entries(payload).filter(([key]) => key !== "files")),
+      ...Object.fromEntries(
+        Object.entries(payload).filter(([key]) => key !== "files"),
+      ),
       submissionChannel,
     };
 
@@ -422,7 +505,9 @@ function ContactWizard() {
       await submitToBackend("email");
       setComplete(true);
     } catch {
-      setFileError("Something went wrong. Please try again or reach us directly at info@true.com.kw");
+      setFileError(
+        "حدث خطأ ما. يرجى المحاولة مجددًا أو التواصل معنا مباشرة على info@true.com.kw",
+      );
     } finally {
       setSending(false);
     }
@@ -430,18 +515,26 @@ function ContactWizard() {
 
   function buildWhatsappMessage(filesSubmitted: boolean) {
     return [
-      `Good day, I am reaching out to inquire about ${data.systems.join(" & ")} solutions for my ${data.spaceType}.`,
-      "I would appreciate the opportunity to discuss this project further at your earliest convenience.",
+      `مرحبًا، أتواصل معكم للاستفسار عن حلول ${data.systems.join(" و")} لـ${data.spaceType} الخاص بي.`,
+      "أقدّر إتاحة الفرصة لمناقشة هذا المشروع بالتفصيل في أقرب وقت يناسبكم.",
       "",
-      `Name: ${data.fullName}`,
-      `Mobile: ${data.mobile} ${data.countryCode}`,
-      `Email: ${data.email}`,
-      data.wiringPreference ? `Preferred wiring: ${data.wiringPreference}` : "",
-      data.homeSystems.length > 0 ? `Systems of interest: ${data.homeSystems.join(", ")}` : "",
-      data.notes ? `Additional notes: ${data.notes}` : "",
-      filesSubmitted ? "Please note that I have submitted project drawings via the website form." : "",
-      files.length > 0 && !filesSubmitted ? "I will attach the project drawings manually in this WhatsApp chat." : "",
-    ].filter(Boolean).join("\n");
+      `الاسم: ${data.fullName}`,
+      `الجوال: ${data.mobile} ${data.countryCode}`,
+      `البريد الإلكتروني: ${data.email}`,
+      data.wiringPreference ? `تفضيل التمديد: ${data.wiringPreference}` : "",
+      data.homeSystems.length > 0
+        ? `الأنظمة المطلوبة: ${data.homeSystems.join("، ")}`
+        : "",
+      data.notes ? `ملاحظات إضافية: ${data.notes}` : "",
+      filesSubmitted
+        ? "يرجى العلم أنني أرسلت مخططات المشروع عبر نموذج الموقع."
+        : "",
+      files.length > 0 && !filesSubmitted
+        ? "سأقوم بإرفاق مخططات المشروع يدويًا في محادثة واتساب هذه."
+        : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
   }
 
   async function sendViaWhatsapp() {
@@ -451,13 +544,23 @@ function ContactWizard() {
     try {
       const result = await submitToBackend("whatsapp");
       const message = buildWhatsappMessage(result.uploadedFiles);
-      window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`, "_blank", "noreferrer");
+      window.open(
+        `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`,
+        "_blank",
+        "noreferrer",
+      );
       setComplete(true);
     } catch (error) {
       console.error("WhatsApp backend submission failed:", error);
       const message = buildWhatsappMessage(false);
-      window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`, "_blank", "noreferrer");
-      setFileError("WhatsApp opened, but your website submission or files were not saved. Please attach files manually in WhatsApp.");
+      window.open(
+        `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`,
+        "_blank",
+        "noreferrer",
+      );
+      setFileError(
+        "تم فتح واتساب، لكن لم يتم حفظ بيانات الموقع أو الملفات. يرجى إرفاق الملفات يدويًا في واتساب.",
+      );
     } finally {
       setSending(false);
     }
@@ -476,7 +579,10 @@ function ContactWizard() {
   }
 
   return (
-    <div ref={formRef} className="rounded-3xl border border-border bg-card p-8 shadow-card md:p-10">
+    <div
+      ref={formRef}
+      className="rounded-3xl border border-border bg-card p-8 shadow-card md:p-10"
+    >
       {complete ? (
         <ConfirmationScreen onStartOver={startOver} />
       ) : (
@@ -487,9 +593,9 @@ function ContactWizard() {
               <motion.div
                 key={step}
                 custom={direction}
-                initial={{ opacity: 0, x: direction > 0 ? 36 : -36 }}
+                initial={{ opacity: 0, x: direction > 0 ? -36 : 36 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction > 0 ? -36 : 36 }}
+                exit={{ opacity: 0, x: direction > 0 ? 36 : -36 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 {step === 0 ? (
@@ -528,7 +634,7 @@ function ContactWizard() {
             <div className="mt-8">
               {showRequiredMessage ? (
                 <p className="mb-3 text-sm font-medium text-destructive">
-                  Please complete the required fields before continuing.
+                  يرجى إكمال الحقول المطلوبة قبل المتابعة.
                 </p>
               ) : null}
               <div className="flex items-center justify-between gap-3">
@@ -538,7 +644,7 @@ function ContactWizard() {
                   disabled={step === 0}
                   className="inline-flex items-center justify-center rounded-full border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-card disabled:pointer-events-none disabled:opacity-40"
                 >
-                  Back
+                  رجوع
                 </button>
                 <button
                   type="button"
@@ -550,7 +656,7 @@ function ContactWizard() {
                       : "bg-gradient-primary text-primary-foreground shadow-glow hover:-translate-y-0.5",
                   )}
                 >
-                  Next
+                  التالي
                 </button>
               </div>
             </div>
@@ -561,7 +667,7 @@ function ContactWizard() {
                 onClick={goBack}
                 className="inline-flex items-center justify-center rounded-full border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-card"
               >
-                Back
+                رجوع
               </button>
             </div>
           )}
@@ -571,46 +677,60 @@ function ContactWizard() {
   );
 }
 
-function StepBar({ activeStep, onStepClick }: { activeStep: number; onStepClick: (step: number) => void }) {
+function StepBar({
+  activeStep,
+  onStepClick,
+}: {
+  activeStep: number;
+  onStepClick: (step: number) => void;
+}) {
   const progressWidth = `${(activeStep / (steps.length - 1)) * 100}%`;
 
   return (
     <div className="relative">
-      <div className="absolute left-0 right-0 top-4 h-px bg-border" />
-      <div className="absolute left-0 top-4 h-px bg-primary transition-all duration-300 ease-out" style={{ width: progressWidth }} />
+      <div className="absolute right-0 left-0 top-4 h-px bg-border" />
+      <div
+        className="absolute right-0 top-4 h-px bg-primary transition-all duration-300 ease-out"
+        style={{ width: progressWidth }}
+      />
       <div className="relative z-10 grid grid-cols-3 gap-3">
-      {steps.map((label, index) => {
-        const completed = index < activeStep;
-        const active = index === activeStep;
-        const clickable = completed;
+        {steps.map((label, index) => {
+          const completed = index < activeStep;
+          const active = index === activeStep;
+          const clickable = completed;
 
-        return (
-          <button
-            key={label}
-            type="button"
-            onClick={() => clickable && onStepClick(index)}
-            disabled={!clickable}
-            className={cn(
-              "flex flex-col items-center gap-2 text-center transition-colors",
-              clickable ? "cursor-pointer" : "cursor-default",
-            )}
-          >
-            <div
+          return (
+            <button
+              key={label}
+              type="button"
+              onClick={() => clickable && onStepClick(index)}
+              disabled={!clickable}
               className={cn(
-                "grid h-9 w-9 shrink-0 place-items-center rounded-full border text-xs font-semibold transition-colors",
-                completed || active
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-background text-muted-foreground",
+                "flex flex-col items-center gap-2 text-center transition-colors",
+                clickable ? "cursor-pointer" : "cursor-default",
               )}
             >
-              {completed ? <Check className="h-4 w-4" /> : index + 1}
-            </div>
-            <div className={cn("text-xs font-semibold uppercase tracking-wider transition-colors", completed || active ? "text-white" : "text-muted-foreground")}>
-              {label}
-            </div>
-          </button>
-        );
-      })}
+              <div
+                className={cn(
+                  "grid h-9 w-9 shrink-0 place-items-center rounded-full border text-xs font-semibold transition-colors",
+                  completed || active
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-background text-muted-foreground",
+                )}
+              >
+                {completed ? <Check className="h-4 w-4" /> : index + 1}
+              </div>
+              <div
+                className={cn(
+                  "text-xs font-semibold uppercase tracking-wider transition-colors",
+                  completed || active ? "text-white" : "text-muted-foreground",
+                )}
+              >
+                {label}
+              </div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -625,20 +745,41 @@ function StepOne({
   data: WizardData;
   errors: Record<string, string>;
   selectedCountry: { code: string; name: string; dial: string };
-  onChange: <K extends keyof WizardData>(field: K, value: WizardData[K]) => void;
+  onChange: <K extends keyof WizardData>(
+    field: K,
+    value: WizardData[K],
+  ) => void;
 }) {
   return (
     <div>
-      <h2 className="text-2xl font-semibold">Who are you?</h2>
-      <p className="mt-1 text-sm text-muted-foreground">A few details so our engineers can reach you.</p>
+      <h2 className="text-2xl font-semibold">من أنت؟</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        بضعة تفاصيل ليتمكن مهندسونا من التواصل معك.
+      </p>
 
       <div className="mt-8 grid gap-5 md:grid-cols-2">
-        <TextField label="Full Name *" value={data.fullName} error={errors.fullName} onChange={(value) => onChange("fullName", value)} />
-        <TextField label="Email Address *" type="email" value={data.email} error={errors.email} onChange={(value) => onChange("email", value)} />
+        <TextField
+          label="الاسم الكامل *"
+          value={data.fullName}
+          error={errors.fullName}
+          onChange={(value) => onChange("fullName", value)}
+        />
+        <TextField
+          label="البريد الإلكتروني *"
+          type="email"
+          value={data.email}
+          error={errors.email}
+          onChange={(value) => onChange("email", value)}
+        />
         <div className="md:col-span-2">
-          <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Mobile Number *</label>
-          <div className="mt-2 grid gap-3 md:grid-cols-[180px_1fr]">
-            <CountrySelect selected={selectedCountry} onSelect={(country) => onChange("countryCode", country.dial)} />
+          <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            رقم الجوال *
+          </label>
+          <div className="mt-2 grid gap-3 md:grid-cols-[180px_1fr]" dir="ltr">
+            <CountrySelect
+              selected={selectedCountry}
+              onSelect={(country) => onChange("countryCode", country.dial)}
+            />
             <input
               type="tel"
               value={data.mobile}
@@ -646,7 +787,11 @@ function StepOne({
               className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
             />
           </div>
-          {errors.mobile ? <p className="mt-2 text-xs font-medium text-destructive">{errors.mobile}</p> : null}
+          {errors.mobile ? (
+            <p className="mt-2 text-xs font-medium text-destructive">
+              {errors.mobile}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
@@ -661,31 +806,48 @@ function StepTwo({
 }: {
   data: WizardData;
   errors: Record<string, string>;
-  onChange: <K extends keyof WizardData>(field: K, value: WizardData[K]) => void;
+  onChange: <K extends keyof WizardData>(
+    field: K,
+    value: WizardData[K],
+  ) => void;
   onToggle: (field: "systems" | "homeSystems", value: string) => void;
 }) {
   const selectedSystem = data.systems[0] ?? "";
-  const homeSelected = data.systems.includes("Home Automation");
-  const selectedSubOptions = selectedSystem ? systemSubOptions[selectedSystem] : [];
+  const homeSelected = data.systems.includes("أتمتة المنزل");
+  const selectedSubOptions = selectedSystem
+    ? systemSubOptions[selectedSystem]
+    : [];
   const hasSelectedSystem = data.systems.length > 0;
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold">Tell us about your project</h2>
+      <h2 className="text-2xl font-semibold">أخبرنا عن مشروعك</h2>
       <div className="mt-8">
-        <p className="text-sm font-semibold text-foreground">What type of space are we working with?</p>
+        <p className="text-sm font-semibold text-foreground">
+          ما نوع المساحة التي نعمل عليها؟
+        </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {spaceTypes.map((space) => (
-            <PillButton key={space} selected={data.spaceType === space} onClick={() => onChange("spaceType", space)}>
+            <PillButton
+              key={space}
+              selected={data.spaceType === space}
+              onClick={() => onChange("spaceType", space)}
+            >
               {space}
             </PillButton>
           ))}
         </div>
-        {errors.spaceType ? <p className="mt-2 text-xs font-medium text-destructive">{errors.spaceType}</p> : null}
+        {errors.spaceType ? (
+          <p className="mt-2 text-xs font-medium text-destructive">
+            {errors.spaceType}
+          </p>
+        ) : null}
       </div>
 
       <div className="mt-8">
-        <p className="text-sm font-semibold text-foreground">What systems are you interested in?</p>
+        <p className="text-sm font-semibold text-foreground">
+          ما الأنظمة التي تهمك؟
+        </p>
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           {systems.map(({ label, icon: Icon }) => {
             const selected = data.systems.includes(label);
@@ -697,19 +859,37 @@ function StepTwo({
                 onClick={() => onToggle("systems", label)}
                 className={cn(
                   "flex items-center gap-3 rounded-2xl border bg-background p-4 text-left transition-colors",
-                  selected ? "border-primary bg-primary/10" : "border-border hover:border-primary/60",
+                  selected
+                    ? "border-primary bg-primary/10"
+                    : "border-border hover:border-primary/60",
                   inactive ? "opacity-35" : "",
                 )}
               >
-                <div className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary", inactive ? "text-muted-foreground" : "")}>
+                <div
+                  className={cn(
+                    "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary",
+                    inactive ? "text-muted-foreground" : "",
+                  )}
+                >
                   <Icon className="h-5 w-5" />
                 </div>
-                <span className={cn("text-sm font-semibold text-foreground", inactive ? "text-muted-foreground" : "")}>{label}</span>
+                <span
+                  className={cn(
+                    "text-sm font-semibold text-foreground",
+                    inactive ? "text-muted-foreground" : "",
+                  )}
+                >
+                  {label}
+                </span>
               </button>
             );
           })}
         </div>
-        {errors.systems ? <p className="mt-2 text-xs font-medium text-destructive">{errors.systems}</p> : null}
+        {errors.systems ? (
+          <p className="mt-2 text-xs font-medium text-destructive">
+            {errors.systems}
+          </p>
+        ) : null}
       </div>
 
       <AnimatePresence>
@@ -724,22 +904,42 @@ function StepTwo({
             <div className="mt-5 rounded-2xl border border-border bg-background p-5">
               {homeSelected ? (
                 <>
-                  <p className="text-sm font-semibold text-foreground">Wiring preference</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    تفضيل التمديد
+                  </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {wiringOptions.map((option) => (
-                      <PillButton key={option} selected={data.wiringPreference === option} onClick={() => onChange("wiringPreference", option)}>
+                      <PillButton
+                        key={option}
+                        selected={data.wiringPreference === option}
+                        onClick={() => onChange("wiringPreference", option)}
+                      >
                         {option}
                       </PillButton>
                     ))}
                   </div>
-                  {errors.wiringPreference ? <p className="mt-2 text-xs font-medium text-destructive">{errors.wiringPreference}</p> : null}
+                  {errors.wiringPreference ? (
+                    <p className="mt-2 text-xs font-medium text-destructive">
+                      {errors.wiringPreference}
+                    </p>
+                  ) : null}
                 </>
               ) : null}
 
-              <p className={cn("text-sm font-semibold text-foreground", homeSelected ? "mt-6" : "")}>Which systems?</p>
+              <p
+                className={cn(
+                  "text-sm font-semibold text-foreground",
+                  homeSelected ? "mt-6" : "",
+                )}
+              >
+                أي الأنظمة؟
+              </p>
               <div className="mt-3 grid gap-3 md:grid-cols-2">
                 {selectedSubOptions.map((system) => (
-                  <label key={system} className="flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 text-sm text-foreground">
+                  <label
+                    key={system}
+                    className="flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 text-sm text-foreground"
+                  >
                     <input
                       type="checkbox"
                       checked={data.homeSystems.includes(system)}
@@ -756,13 +956,15 @@ function StepTwo({
       </AnimatePresence>
 
       <div className="mt-5">
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Anything else we should know?</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          أي شيء آخر تودّ إخبارنا به؟
+        </label>
         <textarea
           value={data.notes}
           onChange={(e) => onChange("notes", e.target.value)}
           rows={5}
           className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
-          placeholder="Project size, timeline, special requirements..."
+          placeholder="حجم المشروع، الجدول الزمني، المتطلبات الخاصة..."
         />
       </div>
     </div>
@@ -792,8 +994,10 @@ function StepThree({
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold">Got drawings? Drop them here.</h2>
-      <p className="mt-1 text-sm text-muted-foreground">We'll review them before getting back to you. Completely optional.</p>
+      <h2 className="text-2xl font-semibold">لديك مخططات؟ ضعها هنا.</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        سنراجعها قبل الرد عليك. اختياري تمامًا.
+      </p>
 
       <button
         type="button"
@@ -806,8 +1010,13 @@ function StepThree({
         className="mt-8 flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-background px-6 py-10 text-center transition-colors hover:border-primary/60"
       >
         <UploadCloud className="h-10 w-10 text-primary" />
-        <span className="mt-4 text-sm font-semibold text-foreground">Drag files here or click to upload</span>
-        <span className="mt-1 text-xs text-muted-foreground">PDF, DWG, DWF, JPG, PNG, ZIP. Max 25MB each, up to 5 files.</span>
+        <span className="mt-4 text-sm font-semibold text-foreground">
+          اسحب الملفات هنا أو انقر للرفع
+        </span>
+        <span className="mt-1 text-xs text-muted-foreground">
+          PDF وDWG وDWF وJPG وPNG وZIP. حتى 25 ميجابايت لكل ملف، بحد أقصى 5
+          ملفات.
+        </span>
       </button>
       <input
         ref={fileInputRef}
@@ -821,14 +1030,26 @@ function StepThree({
         className="hidden"
       />
 
-      {fileError ? <p className="mt-3 text-xs font-medium text-destructive">{fileError}</p> : null}
+      {fileError ? (
+        <p className="mt-3 text-xs font-medium text-destructive">{fileError}</p>
+      ) : null}
 
       {files.length ? (
         <div className="mt-4 space-y-2">
           {files.map((file, index) => (
-            <div key={`${file.name}-${index}`} className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 py-3">
-              <span className="truncate text-sm text-foreground">{file.name}</span>
-              <button type="button" onClick={() => onRemoveFile(index)} className="rounded-full p-1 text-muted-foreground hover:text-foreground" aria-label={`Remove ${file.name}`}>
+            <div
+              key={`${file.name}-${index}`}
+              className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 py-3"
+            >
+              <span className="truncate text-sm text-foreground">
+                {file.name}
+              </span>
+              <button
+                type="button"
+                onClick={() => onRemoveFile(index)}
+                className="rounded-full p-1 text-muted-foreground hover:text-foreground"
+                aria-label={`إزالة ${file.name}`}
+              >
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -843,8 +1064,12 @@ function StepThree({
           disabled={sending}
           className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-          Send via Email
+          {sending ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Send className="h-4 w-4 rotate-180" />
+          )}
+          إرسال عبر البريد الإلكتروني
         </button>
         <button
           type="button"
@@ -852,11 +1077,17 @@ function StepThree({
           disabled={sending}
           className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <MessageCircle className="h-4 w-4" />}
-          Send via WhatsApp
+          {sending ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <MessageCircle className="h-4 w-4" />
+          )}
+          إرسال عبر واتساب
         </button>
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">Your files cannot be sent via WhatsApp - please attach them manually in the chat.</p>
+      <p className="mt-3 text-xs text-muted-foreground">
+        لا يمكن إرسال ملفاتك عبر واتساب - يرجى إرفاقها يدويًا في المحادثة.
+      </p>
     </div>
   );
 }
@@ -867,13 +1098,15 @@ function ConfirmationScreen({ onStartOver }: { onStartOver: () => void }) {
       <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-primary/15 text-primary">
         <Check className="h-7 w-7" />
       </div>
-      <h2 className="mt-6 text-3xl font-semibold tracking-tight">We've got it — we'll be in touch shortly.</h2>
+      <h2 className="mt-6 text-3xl font-semibold tracking-tight">
+        استلمنا طلبك — سنتواصل معك قريبًا.
+      </h2>
       <button
         type="button"
         onClick={onStartOver}
         className="mt-8 inline-flex items-center justify-center rounded-full border border-border bg-card/60 px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-card"
       >
-        Start Over
+        البدء من جديد
       </button>
     </div>
   );
@@ -894,14 +1127,18 @@ function TextField({
 }) {
   return (
     <div>
-      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</label>
+      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
       />
-      {error ? <p className="mt-2 text-xs font-medium text-destructive">{error}</p> : null}
+      {error ? (
+        <p className="mt-2 text-xs font-medium text-destructive">{error}</p>
+      ) : null}
     </div>
   );
 }
@@ -920,7 +1157,9 @@ function CountrySelect({
     const normalizedQuery = query.trim().toLowerCase();
     if (!normalizedQuery) return countries;
     return countries.filter((country) =>
-      `${country.code} ${country.name} ${country.dial}`.toLowerCase().includes(normalizedQuery),
+      `${country.code} ${country.name} ${country.dial}`
+        .toLowerCase()
+        .includes(normalizedQuery),
     );
   }, [query]);
 
@@ -944,7 +1183,9 @@ function CountrySelect({
         onClick={() => setOpen((current) => !current)}
         className="flex w-full items-center justify-between rounded-xl border border-border bg-background px-4 py-3 text-left text-sm outline-none transition-colors hover:border-primary/60"
       >
-        <span>{selected.code} {selected.dial}</span>
+        <span>
+          {selected.code} {selected.dial}
+        </span>
         <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
       </button>
       {open ? (
@@ -952,7 +1193,7 @@ function CountrySelect({
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search country..."
+            placeholder="ابحث عن دولة..."
             className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
           />
           <div className="mt-2 max-h-56 overflow-auto">
@@ -967,7 +1208,9 @@ function CountrySelect({
                 }}
                 className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm text-foreground hover:bg-secondary"
               >
-                <span>{country.code} - {country.name}</span>
+                <span>
+                  {country.code} - {country.name}
+                </span>
                 <span className="text-muted-foreground">{country.dial}</span>
               </button>
             ))}
@@ -978,14 +1221,24 @@ function CountrySelect({
   );
 }
 
-function PillButton({ selected, onClick, children }: { selected: boolean; onClick: () => void; children: ReactNode }) {
+function PillButton({
+  selected,
+  onClick,
+  children,
+}: {
+  selected: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={cn(
         "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
-        selected ? "border-primary bg-primary/15 text-primary" : "border-border bg-background text-muted-foreground hover:text-foreground",
+        selected
+          ? "border-primary bg-primary/15 text-primary"
+          : "border-border bg-background text-muted-foreground hover:text-foreground",
       )}
     >
       {children}

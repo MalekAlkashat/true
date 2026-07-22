@@ -1,19 +1,44 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Globe, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { cn } from "@/lib/utils";
+import { solutions, type SolutionSlug } from "@/data/solutions";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const nav = [
+const navEn = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
 ] as const;
+
+const navAr = [
+  { to: "/ar", label: "الرئيسية" },
+  { to: "/ar/services", label: "الخدمات" },
+] as const;
+
+function counterpartPath(pathname: string, isAr: boolean) {
+  if (isAr) {
+    const stripped = pathname.replace(/^\/ar\/?/, "/");
+    return stripped === "" ? "/" : stripped;
+  }
+  return pathname === "/" ? "/ar/" : `/ar${pathname}`;
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
+  const isAr = location.pathname.startsWith("/ar");
+  const nav = isAr ? navAr : navEn;
+  const solutionsLabel = isAr ? "الحلول" : "Solutions";
+  const quoteLabel = isAr ? "اطلب عرض سعر" : "Get a Quote";
+  const switchHref = counterpartPath(location.pathname, isAr);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -48,7 +73,7 @@ export function Header() {
       )}
     >
       <div className="container mx-auto flex h-full items-center justify-between px-6 md:px-10 lg:px-12">
-        <Link to="/" className="flex items-center gap-3">
+        <Link to={isAr ? "/ar" : "/"} className="flex items-center gap-3">
           <img src={logo} alt="TRUE Automation" className="h-18 w-auto" />
         </Link>
 
@@ -73,16 +98,70 @@ export function Header() {
               </Link>
             );
           })}
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={cn(
+                  "relative flex items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-colors",
+                  solutions.some(
+                    (s) =>
+                      location.pathname === `${isAr ? "/ar" : ""}/${s.slug}`,
+                  )
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {solutionsLabel}
+                <ChevronDown className="h-3.5 w-3.5" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align={isAr ? "end" : "start"}
+              className="w-72"
+            >
+              {solutions.map((s) => (
+                <DropdownMenuItem key={s.slug} asChild>
+                  <Link
+                    to={
+                      (isAr
+                        ? `/ar/${s.slug}`
+                        : `/${s.slug}`) as `/${SolutionSlug}`
+                    }
+                  >
+                    <div>
+                      <div className="font-medium">
+                        {isAr ? s.labelAr : s.label}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {isAr ? s.shortAr : s.short}
+                      </div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
           <Link
-            to="/contact"
-            aria-label="Open the quick quote form"
-            title="Quick quote form"
+            to={switchHref as never}
+            aria-label={isAr ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Globe className="h-3.5 w-3.5" />
+            {isAr ? "EN" : "عربي"}
+          </Link>
+          <Link
+            to={isAr ? "/ar/contact" : "/contact"}
+            aria-label={
+              isAr ? "افتح نموذج طلب عرض السعر" : "Open the quick quote form"
+            }
+            title={isAr ? "نموذج طلب عرض السعر" : "Quick quote form"}
             className="inline-flex items-center rounded-full bg-gradient-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
           >
-            Get a Quote
+            {quoteLabel}
           </Link>
         </div>
 
@@ -107,12 +186,34 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <div className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              {solutionsLabel}
+            </div>
+            {solutions.map((s) => (
+              <Link
+                key={s.slug}
+                to={
+                  (isAr ? `/ar/${s.slug}` : `/${s.slug}`) as `/${SolutionSlug}`
+                }
+                className="rounded-lg px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary"
+              >
+                {isAr ? s.labelAr : s.label}
+              </Link>
+            ))}
             <Link
-              to="/contact"
-              aria-label="Open the quick quote form"
+              to={switchHref as never}
+              className="rounded-lg px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary"
+            >
+              {isAr ? "English" : "العربية"}
+            </Link>
+            <Link
+              to={isAr ? "/ar/contact" : "/contact"}
+              aria-label={
+                isAr ? "افتح نموذج طلب عرض السعر" : "Open the quick quote form"
+              }
               className="mt-1 rounded-lg bg-gradient-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
             >
-              Get a Quote
+              {quoteLabel}
             </Link>
           </div>
         </div>

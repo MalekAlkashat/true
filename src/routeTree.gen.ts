@@ -9,63 +9,300 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SystemIntegrationKuwaitRouteImport } from './routes/system-integration-kuwait'
+import { Route as SmartHomeAutomationKuwaitRouteImport } from './routes/smart-home-automation-kuwait'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as GuestRoomManagementKuwaitRouteImport } from './routes/guest-room-management-kuwait'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BuildingManagementSystemKuwaitRouteImport } from './routes/building-management-system-kuwait'
+import { Route as BuildingAutomationSystemKuwaitRouteImport } from './routes/building-automation-system-kuwait'
+import { Route as AutomationControlSystemsKuwaitRouteImport } from './routes/automation-control-systems-kuwait'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArIndexRouteImport } from './routes/ar/index'
+import { Route as ArSystemIntegrationKuwaitRouteImport } from './routes/ar/system-integration-kuwait'
+import { Route as ArSmartHomeAutomationKuwaitRouteImport } from './routes/ar/smart-home-automation-kuwait'
+import { Route as ArServicesRouteImport } from './routes/ar/services'
+import { Route as ArGuestRoomManagementKuwaitRouteImport } from './routes/ar/guest-room-management-kuwait'
+import { Route as ArContactRouteImport } from './routes/ar/contact'
+import { Route as ArBuildingManagementSystemKuwaitRouteImport } from './routes/ar/building-management-system-kuwait'
+import { Route as ArBuildingAutomationSystemKuwaitRouteImport } from './routes/ar/building-automation-system-kuwait'
+import { Route as ArAutomationControlSystemsKuwaitRouteImport } from './routes/ar/automation-control-systems-kuwait'
 
+const SystemIntegrationKuwaitRoute = SystemIntegrationKuwaitRouteImport.update({
+  id: '/system-integration-kuwait',
+  path: '/system-integration-kuwait',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmartHomeAutomationKuwaitRoute =
+  SmartHomeAutomationKuwaitRouteImport.update({
+    id: '/smart-home-automation-kuwait',
+    path: '/smart-home-automation-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuestRoomManagementKuwaitRoute =
+  GuestRoomManagementKuwaitRouteImport.update({
+    id: '/guest-room-management-kuwait',
+    path: '/guest-room-management-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuildingManagementSystemKuwaitRoute =
+  BuildingManagementSystemKuwaitRouteImport.update({
+    id: '/building-management-system-kuwait',
+    path: '/building-management-system-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BuildingAutomationSystemKuwaitRoute =
+  BuildingAutomationSystemKuwaitRouteImport.update({
+    id: '/building-automation-system-kuwait',
+    path: '/building-automation-system-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AutomationControlSystemsKuwaitRoute =
+  AutomationControlSystemsKuwaitRouteImport.update({
+    id: '/automation-control-systems-kuwait',
+    path: '/automation-control-systems-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArIndexRoute = ArIndexRouteImport.update({
+  id: '/ar/',
+  path: '/ar/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArSystemIntegrationKuwaitRoute =
+  ArSystemIntegrationKuwaitRouteImport.update({
+    id: '/ar/system-integration-kuwait',
+    path: '/ar/system-integration-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ArSmartHomeAutomationKuwaitRoute =
+  ArSmartHomeAutomationKuwaitRouteImport.update({
+    id: '/ar/smart-home-automation-kuwait',
+    path: '/ar/smart-home-automation-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ArServicesRoute = ArServicesRouteImport.update({
+  id: '/ar/services',
+  path: '/ar/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArGuestRoomManagementKuwaitRoute =
+  ArGuestRoomManagementKuwaitRouteImport.update({
+    id: '/ar/guest-room-management-kuwait',
+    path: '/ar/guest-room-management-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ArContactRoute = ArContactRouteImport.update({
+  id: '/ar/contact',
+  path: '/ar/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArBuildingManagementSystemKuwaitRoute =
+  ArBuildingManagementSystemKuwaitRouteImport.update({
+    id: '/ar/building-management-system-kuwait',
+    path: '/ar/building-management-system-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ArBuildingAutomationSystemKuwaitRoute =
+  ArBuildingAutomationSystemKuwaitRouteImport.update({
+    id: '/ar/building-automation-system-kuwait',
+    path: '/ar/building-automation-system-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ArAutomationControlSystemsKuwaitRoute =
+  ArAutomationControlSystemsKuwaitRouteImport.update({
+    id: '/ar/automation-control-systems-kuwait',
+    path: '/ar/automation-control-systems-kuwait',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/automation-control-systems-kuwait': typeof AutomationControlSystemsKuwaitRoute
+  '/building-automation-system-kuwait': typeof BuildingAutomationSystemKuwaitRoute
+  '/building-management-system-kuwait': typeof BuildingManagementSystemKuwaitRoute
   '/contact': typeof ContactRoute
+  '/guest-room-management-kuwait': typeof GuestRoomManagementKuwaitRoute
   '/services': typeof ServicesRoute
+  '/smart-home-automation-kuwait': typeof SmartHomeAutomationKuwaitRoute
+  '/system-integration-kuwait': typeof SystemIntegrationKuwaitRoute
+  '/ar/automation-control-systems-kuwait': typeof ArAutomationControlSystemsKuwaitRoute
+  '/ar/building-automation-system-kuwait': typeof ArBuildingAutomationSystemKuwaitRoute
+  '/ar/building-management-system-kuwait': typeof ArBuildingManagementSystemKuwaitRoute
+  '/ar/contact': typeof ArContactRoute
+  '/ar/guest-room-management-kuwait': typeof ArGuestRoomManagementKuwaitRoute
+  '/ar/services': typeof ArServicesRoute
+  '/ar/smart-home-automation-kuwait': typeof ArSmartHomeAutomationKuwaitRoute
+  '/ar/system-integration-kuwait': typeof ArSystemIntegrationKuwaitRoute
+  '/ar/': typeof ArIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/automation-control-systems-kuwait': typeof AutomationControlSystemsKuwaitRoute
+  '/building-automation-system-kuwait': typeof BuildingAutomationSystemKuwaitRoute
+  '/building-management-system-kuwait': typeof BuildingManagementSystemKuwaitRoute
   '/contact': typeof ContactRoute
+  '/guest-room-management-kuwait': typeof GuestRoomManagementKuwaitRoute
   '/services': typeof ServicesRoute
+  '/smart-home-automation-kuwait': typeof SmartHomeAutomationKuwaitRoute
+  '/system-integration-kuwait': typeof SystemIntegrationKuwaitRoute
+  '/ar/automation-control-systems-kuwait': typeof ArAutomationControlSystemsKuwaitRoute
+  '/ar/building-automation-system-kuwait': typeof ArBuildingAutomationSystemKuwaitRoute
+  '/ar/building-management-system-kuwait': typeof ArBuildingManagementSystemKuwaitRoute
+  '/ar/contact': typeof ArContactRoute
+  '/ar/guest-room-management-kuwait': typeof ArGuestRoomManagementKuwaitRoute
+  '/ar/services': typeof ArServicesRoute
+  '/ar/smart-home-automation-kuwait': typeof ArSmartHomeAutomationKuwaitRoute
+  '/ar/system-integration-kuwait': typeof ArSystemIntegrationKuwaitRoute
+  '/ar': typeof ArIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/automation-control-systems-kuwait': typeof AutomationControlSystemsKuwaitRoute
+  '/building-automation-system-kuwait': typeof BuildingAutomationSystemKuwaitRoute
+  '/building-management-system-kuwait': typeof BuildingManagementSystemKuwaitRoute
   '/contact': typeof ContactRoute
+  '/guest-room-management-kuwait': typeof GuestRoomManagementKuwaitRoute
   '/services': typeof ServicesRoute
+  '/smart-home-automation-kuwait': typeof SmartHomeAutomationKuwaitRoute
+  '/system-integration-kuwait': typeof SystemIntegrationKuwaitRoute
+  '/ar/automation-control-systems-kuwait': typeof ArAutomationControlSystemsKuwaitRoute
+  '/ar/building-automation-system-kuwait': typeof ArBuildingAutomationSystemKuwaitRoute
+  '/ar/building-management-system-kuwait': typeof ArBuildingManagementSystemKuwaitRoute
+  '/ar/contact': typeof ArContactRoute
+  '/ar/guest-room-management-kuwait': typeof ArGuestRoomManagementKuwaitRoute
+  '/ar/services': typeof ArServicesRoute
+  '/ar/smart-home-automation-kuwait': typeof ArSmartHomeAutomationKuwaitRoute
+  '/ar/system-integration-kuwait': typeof ArSystemIntegrationKuwaitRoute
+  '/ar/': typeof ArIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/services'
+  fullPaths:
+    | '/'
+    | '/automation-control-systems-kuwait'
+    | '/building-automation-system-kuwait'
+    | '/building-management-system-kuwait'
+    | '/contact'
+    | '/guest-room-management-kuwait'
+    | '/services'
+    | '/smart-home-automation-kuwait'
+    | '/system-integration-kuwait'
+    | '/ar/automation-control-systems-kuwait'
+    | '/ar/building-automation-system-kuwait'
+    | '/ar/building-management-system-kuwait'
+    | '/ar/contact'
+    | '/ar/guest-room-management-kuwait'
+    | '/ar/services'
+    | '/ar/smart-home-automation-kuwait'
+    | '/ar/system-integration-kuwait'
+    | '/ar/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/services'
-  id: '__root__' | '/' | '/contact' | '/services'
+  to:
+    | '/'
+    | '/automation-control-systems-kuwait'
+    | '/building-automation-system-kuwait'
+    | '/building-management-system-kuwait'
+    | '/contact'
+    | '/guest-room-management-kuwait'
+    | '/services'
+    | '/smart-home-automation-kuwait'
+    | '/system-integration-kuwait'
+    | '/ar/automation-control-systems-kuwait'
+    | '/ar/building-automation-system-kuwait'
+    | '/ar/building-management-system-kuwait'
+    | '/ar/contact'
+    | '/ar/guest-room-management-kuwait'
+    | '/ar/services'
+    | '/ar/smart-home-automation-kuwait'
+    | '/ar/system-integration-kuwait'
+    | '/ar'
+  id:
+    | '__root__'
+    | '/'
+    | '/automation-control-systems-kuwait'
+    | '/building-automation-system-kuwait'
+    | '/building-management-system-kuwait'
+    | '/contact'
+    | '/guest-room-management-kuwait'
+    | '/services'
+    | '/smart-home-automation-kuwait'
+    | '/system-integration-kuwait'
+    | '/ar/automation-control-systems-kuwait'
+    | '/ar/building-automation-system-kuwait'
+    | '/ar/building-management-system-kuwait'
+    | '/ar/contact'
+    | '/ar/guest-room-management-kuwait'
+    | '/ar/services'
+    | '/ar/smart-home-automation-kuwait'
+    | '/ar/system-integration-kuwait'
+    | '/ar/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutomationControlSystemsKuwaitRoute: typeof AutomationControlSystemsKuwaitRoute
+  BuildingAutomationSystemKuwaitRoute: typeof BuildingAutomationSystemKuwaitRoute
+  BuildingManagementSystemKuwaitRoute: typeof BuildingManagementSystemKuwaitRoute
   ContactRoute: typeof ContactRoute
+  GuestRoomManagementKuwaitRoute: typeof GuestRoomManagementKuwaitRoute
   ServicesRoute: typeof ServicesRoute
+  SmartHomeAutomationKuwaitRoute: typeof SmartHomeAutomationKuwaitRoute
+  SystemIntegrationKuwaitRoute: typeof SystemIntegrationKuwaitRoute
+  ArAutomationControlSystemsKuwaitRoute: typeof ArAutomationControlSystemsKuwaitRoute
+  ArBuildingAutomationSystemKuwaitRoute: typeof ArBuildingAutomationSystemKuwaitRoute
+  ArBuildingManagementSystemKuwaitRoute: typeof ArBuildingManagementSystemKuwaitRoute
+  ArContactRoute: typeof ArContactRoute
+  ArGuestRoomManagementKuwaitRoute: typeof ArGuestRoomManagementKuwaitRoute
+  ArServicesRoute: typeof ArServicesRoute
+  ArSmartHomeAutomationKuwaitRoute: typeof ArSmartHomeAutomationKuwaitRoute
+  ArSystemIntegrationKuwaitRoute: typeof ArSystemIntegrationKuwaitRoute
+  ArIndexRoute: typeof ArIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/system-integration-kuwait': {
+      id: '/system-integration-kuwait'
+      path: '/system-integration-kuwait'
+      fullPath: '/system-integration-kuwait'
+      preLoaderRoute: typeof SystemIntegrationKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/smart-home-automation-kuwait': {
+      id: '/smart-home-automation-kuwait'
+      path: '/smart-home-automation-kuwait'
+      fullPath: '/smart-home-automation-kuwait'
+      preLoaderRoute: typeof SmartHomeAutomationKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guest-room-management-kuwait': {
+      id: '/guest-room-management-kuwait'
+      path: '/guest-room-management-kuwait'
+      fullPath: '/guest-room-management-kuwait'
+      preLoaderRoute: typeof GuestRoomManagementKuwaitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -75,6 +312,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/building-management-system-kuwait': {
+      id: '/building-management-system-kuwait'
+      path: '/building-management-system-kuwait'
+      fullPath: '/building-management-system-kuwait'
+      preLoaderRoute: typeof BuildingManagementSystemKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/building-automation-system-kuwait': {
+      id: '/building-automation-system-kuwait'
+      path: '/building-automation-system-kuwait'
+      fullPath: '/building-automation-system-kuwait'
+      preLoaderRoute: typeof BuildingAutomationSystemKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/automation-control-systems-kuwait': {
+      id: '/automation-control-systems-kuwait'
+      path: '/automation-control-systems-kuwait'
+      fullPath: '/automation-control-systems-kuwait'
+      preLoaderRoute: typeof AutomationControlSystemsKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -82,13 +340,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ar/': {
+      id: '/ar/'
+      path: '/ar'
+      fullPath: '/ar/'
+      preLoaderRoute: typeof ArIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/system-integration-kuwait': {
+      id: '/ar/system-integration-kuwait'
+      path: '/ar/system-integration-kuwait'
+      fullPath: '/ar/system-integration-kuwait'
+      preLoaderRoute: typeof ArSystemIntegrationKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/smart-home-automation-kuwait': {
+      id: '/ar/smart-home-automation-kuwait'
+      path: '/ar/smart-home-automation-kuwait'
+      fullPath: '/ar/smart-home-automation-kuwait'
+      preLoaderRoute: typeof ArSmartHomeAutomationKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/services': {
+      id: '/ar/services'
+      path: '/ar/services'
+      fullPath: '/ar/services'
+      preLoaderRoute: typeof ArServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/guest-room-management-kuwait': {
+      id: '/ar/guest-room-management-kuwait'
+      path: '/ar/guest-room-management-kuwait'
+      fullPath: '/ar/guest-room-management-kuwait'
+      preLoaderRoute: typeof ArGuestRoomManagementKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/contact': {
+      id: '/ar/contact'
+      path: '/ar/contact'
+      fullPath: '/ar/contact'
+      preLoaderRoute: typeof ArContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/building-management-system-kuwait': {
+      id: '/ar/building-management-system-kuwait'
+      path: '/ar/building-management-system-kuwait'
+      fullPath: '/ar/building-management-system-kuwait'
+      preLoaderRoute: typeof ArBuildingManagementSystemKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/building-automation-system-kuwait': {
+      id: '/ar/building-automation-system-kuwait'
+      path: '/ar/building-automation-system-kuwait'
+      fullPath: '/ar/building-automation-system-kuwait'
+      preLoaderRoute: typeof ArBuildingAutomationSystemKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/automation-control-systems-kuwait': {
+      id: '/ar/automation-control-systems-kuwait'
+      path: '/ar/automation-control-systems-kuwait'
+      fullPath: '/ar/automation-control-systems-kuwait'
+      preLoaderRoute: typeof ArAutomationControlSystemsKuwaitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutomationControlSystemsKuwaitRoute: AutomationControlSystemsKuwaitRoute,
+  BuildingAutomationSystemKuwaitRoute: BuildingAutomationSystemKuwaitRoute,
+  BuildingManagementSystemKuwaitRoute: BuildingManagementSystemKuwaitRoute,
   ContactRoute: ContactRoute,
+  GuestRoomManagementKuwaitRoute: GuestRoomManagementKuwaitRoute,
   ServicesRoute: ServicesRoute,
+  SmartHomeAutomationKuwaitRoute: SmartHomeAutomationKuwaitRoute,
+  SystemIntegrationKuwaitRoute: SystemIntegrationKuwaitRoute,
+  ArAutomationControlSystemsKuwaitRoute: ArAutomationControlSystemsKuwaitRoute,
+  ArBuildingAutomationSystemKuwaitRoute: ArBuildingAutomationSystemKuwaitRoute,
+  ArBuildingManagementSystemKuwaitRoute: ArBuildingManagementSystemKuwaitRoute,
+  ArContactRoute: ArContactRoute,
+  ArGuestRoomManagementKuwaitRoute: ArGuestRoomManagementKuwaitRoute,
+  ArServicesRoute: ArServicesRoute,
+  ArSmartHomeAutomationKuwaitRoute: ArSmartHomeAutomationKuwaitRoute,
+  ArSystemIntegrationKuwaitRoute: ArSystemIntegrationKuwaitRoute,
+  ArIndexRoute: ArIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
