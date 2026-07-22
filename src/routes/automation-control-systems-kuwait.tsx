@@ -6,22 +6,22 @@ export const Route = createFileRoute("/automation-control-systems-kuwait")({
     meta: [
       {
         title:
-          "Automation & Low-Voltage Control Systems Kuwait | CCTV, Access, Networks | TRUE",
+          "Automation & Smart Control Systems Kuwait | CCTV, Access, Networks | TRUE",
       },
       {
         name: "description",
         content:
-          "Automation control systems in Kuwait: CCTV, access control, intercom, structured networking, irrigation and pro audio — engineered and installed by TRUE.",
+          "Smart control and automation systems in Kuwait: CCTV, access control, intercom, structured networking, irrigation and pro audio — engineered and installed by TRUE.",
       },
       {
         property: "og:title",
         content:
-          "Automation & Low-Voltage Control Systems Kuwait | CCTV, Access, Networks | TRUE",
+          "Automation & Smart Control Systems Kuwait | CCTV, Access, Networks | TRUE",
       },
       {
         property: "og:description",
         content:
-          "Automation control systems in Kuwait: CCTV, access control, intercom, structured networking, irrigation and pro audio — engineered and installed by TRUE.",
+          "Smart control and automation systems in Kuwait: CCTV, access control, intercom, structured networking, irrigation and pro audio — engineered and installed by TRUE.",
       },
       { property: "og:url", content: "/automation-control-systems-kuwait" },
       { property: "og:type", content: "website" },
@@ -52,11 +52,11 @@ export const Route = createFileRoute("/automation-control-systems-kuwait")({
       eyebrow="Infrastructure & Control"
       h1="Automation & Low-Voltage Control Systems"
       highlight="in Kuwait"
-      heroLead="The backbone that makes everything else work — certified structured cabling, IP networks, CCTV, access control, intercom, telephony, irrigation and pro audio, unified under one automation control layer."
+      heroLead="The backbone that makes everything else work — certified structured cabling, IP networks, CCTV, access control, intercom, telephony, irrigation and pro audio, unified under one smart control layer."
       overviewHeading="Every low-voltage control system, engineered together"
       overviewParagraphs={[
         "Automation control systems are the infrastructure layer beneath every smart home, BAS or BMS project — structured cabling, IP networking, CCTV, access control, intercom and telephony all need to be designed together, not bolted on separately by different contractors. When they aren't, buildings end up with fragile point solutions that don't talk to each other.",
-        "TRUE engineers this layer as a single, coordinated control system for residential and commercial projects across Kuwait. Smart IP cameras integrate with access control and lighting for security automation. Structured networks are built to carry the load of every other automated system reliably, not just internet traffic. Irrigation and pro sound integrate into the same scene-based control as the rest of the property.",
+        "TRUE engineers this layer as a single, coordinated smart control system for residential and commercial projects across Kuwait. Smart IP cameras integrate with access control and lighting for security automation. Structured networks are built to carry the load of every other automated system reliably, not just internet traffic. Irrigation and pro sound integrate into the same scene-based smart control as the rest of the property.",
         "The result is a control foundation that scales — add rooms, add cameras, add a new automation zone, and the underlying infrastructure already supports it.",
       ]}
       features={[
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/automation-control-systems-kuwait")({
           text: "Surveillance integrated with access control and automation triggers, not a standalone silo.",
         },
         {
-          title: "IoT smart intercom",
+          title: "Smart Intercom (IoT)",
           text: "Video intercom tied into mobile apps and access control for remote visitor management.",
         },
         {
@@ -81,14 +81,18 @@ export const Route = createFileRoute("/automation-control-systems-kuwait")({
           text: "Scheduled, weather-aware irrigation integrated into the same control platform.",
         },
         {
-          title: "Pro sound systems",
-          text: "Multi-zone audio engineered for commercial and residential spaces alike.",
+          title: "Smart sound systems",
+          text: "Multi-zone smart sound and pro audio engineered for commercial and residential spaces alike.",
         },
       ]}
       faqs={[
         {
           q: "Do these systems work with a smart home or BAS I'm already installing?",
           a: "Yes — this infrastructure layer is designed to be the foundation those systems run on, whether installed at the same time or added later.",
+        },
+        {
+          q: "What is 'smart control' exactly?",
+          a: "Smart control refers to the unified layer that lets separate systems — cameras, access, lighting, irrigation, audio — respond to shared triggers and scenes instead of operating as isolated devices. It's what turns a collection of gadgets into one coherent system.",
         },
         {
           q: "Can CCTV and access control be managed from one app?",
@@ -102,13 +106,9 @@ export const Route = createFileRoute("/automation-control-systems-kuwait")({
           q: "Do you handle commercial and residential projects?",
           a: "Yes, we deliver automation control infrastructure for villas, apartments, showrooms, restaurants and full commercial buildings across Kuwait.",
         },
-        {
-          q: "Can irrigation and audio really integrate with a smart home system?",
-          a: "Yes — irrigation schedules and multi-zone audio are controlled through the same platform and scenes as lighting, climate and security, rather than needing separate apps.",
-        },
       ]}
       serviceType="Automation and Low-Voltage Control Systems"
-      schemaDescription="Automation and low-voltage control system design and installation in Kuwait, covering CCTV, access control, intercom, IP telephony, structured networking, irrigation and pro audio."
+      schemaDescription="Automation and smart control system design and installation in Kuwait, covering CCTV, access control, intercom, IP telephony, structured networking, irrigation and pro audio."
     />
   ),
 });

@@ -58,22 +58,23 @@ export const Route = createFileRoute("/smart-home-automation-kuwait")({
         "Smart home automation in Kuwait is no longer a luxury add-on — it's how modern villas, apartments and penthouses are designed from the ground up. TRUE Automation builds systems that unify lighting, climate, curtains, audio, security and access into a single, intuitive layer you control from a wall panel, your phone, or your voice.",
         "Every project starts with how you actually live in the space, not a generic package. Morning routines, entertaining, movie nights, away-mode security — we design scenes around your household, then wire, program and commission the system so it just works, every day, without you thinking about it.",
         "We work with certified global automation brands and open protocols, so your smart home stays reliable, serviceable and upgradeable for years — not locked into a single vendor's roadmap.",
+        "Every subsystem gets its own dedicated attention: light control with smart lighting scenes, HVAC control with smart AC scheduling, curtain control and shutter control with smart curtain and smart shutter motors, plus smart intercom and smart sound distribution — all unified under one automation platform instead of five separate remotes.",
       ]}
       features={[
         {
-          title: "Lighting control & dimming scenes",
-          text: "Circadian and mood-based lighting scenes for every room, triggered by time, occupancy or a single tap.",
+          title: "Light control & smart lighting",
+          text: "Circadian and mood-based smart lighting scenes for every room, triggered by time, occupancy or a single tap.",
         },
         {
-          title: "Smart climate & HVAC integration",
-          text: "Zone-by-zone temperature control that learns your schedule and cuts energy waste.",
+          title: "HVAC control & smart AC",
+          text: "Zone-by-zone smart HVAC and AC control that learns your schedule and cuts energy waste.",
         },
         {
-          title: "Motorized curtains, shades & shutters",
-          text: "Automated window treatments synced to sun position, scenes or voice command.",
+          title: "Curtain control & shutter control",
+          text: "Smart curtain and smart shutter automation synced to sun position, scenes or voice command.",
         },
         {
-          title: "Multi-room audio & video distribution",
+          title: "Multi-room audio & smart sound",
           text: "Whole-home audio and video streamed to any room, controlled from one app.",
         },
         {
@@ -81,8 +82,8 @@ export const Route = createFileRoute("/smart-home-automation-kuwait")({
           text: "Works with Alexa, Google Assistant and Siri for hands-free control of every subsystem.",
         },
         {
-          title: "Smart security & access",
-          text: "Smart locks, cameras and alarm integration tied into the same automation platform.",
+          title: "Smart security, access & smart intercom",
+          text: "Smart locks, cameras, smart intercom and alarm integration tied into the same automation platform.",
         },
       ]}
       faqs={[
