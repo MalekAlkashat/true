@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
+  HeadContent,
   Outlet,
   Link,
   createRootRouteWithContext,
@@ -133,6 +134,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <HeadContent />
       <JsonLd data={organizationJsonLd} />
       <div className="flex min-h-screen flex-col bg-background text-foreground">
         <Header />
