@@ -28,14 +28,27 @@ const organizationJsonLd = {
   email: "info@true.com.kw",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Ben Khaldoun St., Shoaa Complex, 5th Fl",
+    streetAddress: "Shoaa' Center, Ibn Khaldoun Street, 5th Fl",
     addressLocality: "Hawally",
     addressCountry: "KW",
   },
   areaServed: { "@type": "Country", name: "Kuwait" },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+    ],
+    opens: "09:00",
+    closes: "18:00",
+  },
   sameAs: [
     "https://www.instagram.com/true.automation",
     "https://www.linkedin.com/company/true-for-genral-trading-&-contracting-co-",
+    "https://twitter.com/truekuwait",
   ],
 };
 

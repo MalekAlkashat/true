@@ -219,7 +219,7 @@ function ContactPage() {
                   icon: MapPin,
                   label: "المكتب",
                   value:
-                    "شارع بن خلدون، مجمع الشعاع، الطابق الخامس، حولي، الكويت",
+                    "مركز الشعاع، شارع ابن خلدون، الطابق الخامس، حولي، الكويت",
                 },
                 {
                   icon: Clock,
@@ -259,7 +259,7 @@ function ContactPage() {
             <div className="order-last mt-6 overflow-hidden rounded-2xl border border-border shadow-card md:order-none">
               <iframe
                 title="موقع مكتب TRUE Automation"
-                src="https://www.google.com/maps?q=Ben+Khaldoun+St,+Shoaa+Complex,+Hawally,+Kuwait&output=embed"
+                src="https://www.google.com/maps?q=Ibn+Khaldoun+St,+Shoaa+Center,+Hawally,+Kuwait&output=embed"
                 className="h-72 w-full"
                 loading="lazy"
               />

@@ -174,7 +174,7 @@ function ContactPage() {
                 { icon: Phone, label: "Call", value: "+965 5222 0900", href: "tel:+96552220900" },
                 { icon: Phone, label: "Mobile", value: "+965 5054 4882", href: "tel:+96550544882" },
                 { icon: Mail, label: "Email", value: "info@true.com.kw", href: "mailto:info@true.com.kw" },
-                { icon: MapPin, label: "Office", value: "Ben Khaldoun St., Shoaa Complex, 5th Fl, Hawally, Kuwait" },
+                { icon: MapPin, label: "Office", value: "Shoaa' Center, Ibn Khaldoun Street, 5th Fl, Hawally, Kuwait" },
                 { icon: Clock, label: "Hours", value: "Sun - Thu - 9:00 - 18:00" },
               ].map((c) => (
                 <div
@@ -197,7 +197,7 @@ function ContactPage() {
             <div className="order-last mt-6 overflow-hidden rounded-2xl border border-border shadow-card md:order-none">
               <iframe
                 title="TRUE Automation office location"
-                src="https://www.google.com/maps?q=Ben+Khaldoun+St,+Shoaa+Complex,+Hawally,+Kuwait&output=embed"
+                src="https://www.google.com/maps?q=Ibn+Khaldoun+St,+Shoaa+Center,+Hawally,+Kuwait&output=embed"
                 className="h-72 w-full"
                 loading="lazy"
               />
