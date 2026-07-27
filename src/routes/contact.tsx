@@ -175,7 +175,7 @@ function ContactPage() {
                 { icon: Phone, label: "Mobile", value: "+965 5054 4882", href: "tel:+96550544882" },
                 { icon: Mail, label: "Email", value: "info@true.com.kw", href: "mailto:info@true.com.kw" },
                 { icon: MapPin, label: "Office", value: "Shoaa' Center, Ibn Khaldoun Street, 5th Fl, Hawally, Kuwait" },
-                { icon: Clock, label: "Hours", value: "Sun - Thu - 9:00 - 18:00" },
+                { icon: Clock, label: "Hours", value: "Sun - Thu - 9:00 - 17:00" },
               ].map((c) => (
                 <div
                   key={c.label}

@@ -43,7 +43,7 @@ const organizationJsonLd = {
       "Thursday",
     ],
     opens: "09:00",
-    closes: "18:00",
+    closes: "17:00",
   },
   sameAs: [
     "https://www.instagram.com/true.automation",
