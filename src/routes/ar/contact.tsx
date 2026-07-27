@@ -224,7 +224,7 @@ function ContactPage() {
                 {
                   icon: Clock,
                   label: "ساعات العمل",
-                  value: "الأحد - الخميس - 9:00 - 17:00",
+                  value: "السبت - الخميس - 8:00 - 13:00، 14:00 - 17:00",
                 },
               ].map((c) => (
                 <div

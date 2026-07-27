@@ -33,18 +33,34 @@ const organizationJsonLd = {
     addressCountry: "KW",
   },
   areaServed: { "@type": "Country", name: "Kuwait" },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-    ],
-    opens: "09:00",
-    closes: "17:00",
-  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+      ],
+      opens: "08:00",
+      closes: "13:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+      ],
+      opens: "14:00",
+      closes: "17:00",
+    },
+  ],
   sameAs: [
     "https://www.instagram.com/true.automation",
     "https://www.linkedin.com/company/true-for-genral-trading-&-contracting-co-",
